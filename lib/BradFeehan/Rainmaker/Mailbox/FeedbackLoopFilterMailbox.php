@@ -98,36 +98,37 @@ class FeedbackLoopFilterMailbox extends FilterIterator implements MailboxInterfa
             return false;
         }
 
+	// Commented because the providers didn't use Content-Type: multipart/report
         // Must have "multipart/report" content type
-        if ($type !== 'multipart/report') {
-            $this->logger->debug(
-                "The message's Content-Type is not 'multipart/report'",
-                array('Content-Type' => $contentType->toString())
-            );
-            return false;
-        }
+        //if ($type !== 'multipart/report') {
+        //    $this->logger->debug(
+        //        "The message's Content-Type is not 'multipart/report'",
+        //        array('Content-Type' => $contentType->toString())
+        //    );
+        //    return false;
+        //}
 
-        try {
-            $reportType = $contentType->getParameter('report-type');
-        } catch (\Zend\Mail\Storage\Exception\InvalidArgumentException $e) {
-            $this->logger->debug(
-                'Ignoring message with missing Report-Type',
-                array('Content-Type' => $contentType->toString())
-            );
-
-            return false;
-        }
-
+        //try {
+        //    $reportType = $contentType->getParameter('report-type');
+        //} catch (\Zend\Mail\Storage\Exception\InvalidArgumentException $e) {
+        //    $this->logger->debug(
+        //        'Ignoring message with missing Report-Type',
+        //        array('Content-Type' => $contentType->toString())
+        //    );
+        //
+        //    return false;
+        //}
+        
         // Must have "report-type" set to "feedback-report"
-        if ($reportType !== 'feedback-report') {
-            $this->logger->debug(
-                "The report's Report-Type is not 'feedback-report'",
-                array(
-                    'Report-Type' => $contentType->getParameter('report-type'),
-                )
-            );
-            return false;
-        }
+        //if ($reportType !== 'feedback-report') {
+        //    $this->logger->debug(
+        //        "The report's Report-Type is not 'feedback-report'",
+        //        array(
+        //            'Report-Type' => $contentType->getParameter('report-type'),
+        //        )
+        //    );
+        //    return false;
+        //}
 
         return true;
     }
